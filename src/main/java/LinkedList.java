@@ -34,6 +34,7 @@ public class LinkedList {
         }
     }
 
+
     public void delete(int pos) { // pass in the pointer of head, not actually the head node
         Node temp = head;
         if (pos == 1) {
@@ -44,6 +45,19 @@ public class LinkedList {
             }
             temp.next = temp.next.next; // pos node -> next = pos+1 node
         }
+    }
+
+    public void reverse() {
+        Node prev = null;
+        Node current = head;
+        Node next = null;
+        while (current != null) {
+            next = current.next; // Store next node
+            current.next = prev; // Reverse current node's pointer
+            prev = current; // Move pointers one position ahead
+            current = next;
+        }
+        head = prev; // Update head to the new first node
     }
 
     @Override
@@ -61,16 +75,6 @@ public class LinkedList {
     {
         LinkedList list = new LinkedList();
         list.head = null; // 头节点
-//        System.out.printf("How many numbers?\n");
-//        Scanner in = new Scanner(System.in);
-//        int n = in.nextInt();
-//        int x;
-//        for ( int i = 0; i < n; i++ ) {
-//            System.out.printf("Enter the number \n");
-//            x = in.nextInt();
-//            list.insert(x);
-//            System.out.println(list);
-//        }
 
         list.insert(1,4);
         list.insert(2,5);
@@ -82,6 +86,11 @@ public class LinkedList {
         list.delete(2);
 
         System.out.println(list);
+
+        list.reverse();
+
+        System.out.println(list);
+
 
 
 
