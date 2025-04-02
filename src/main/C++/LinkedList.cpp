@@ -47,27 +47,18 @@ void Delete(Node** head, int pos) {
     delete temp2; // 释放内存
 }
 
-int Size(Node** head) {
-    Node* temp = *head; // 临时节点遍历得到当前尾节点，不直接用head是不想失去头节点的引用
-    int length = 0;
-    while (temp -> next != NULL) {
-        length++;
-        temp = temp -> next;
-    }
-    return size;
-}
-
 
 void Reverse(Node** head) {
-    Node* temp = *head;
-    int i = 0;
-    int size = Size(head);
-    while (temp != NULL) {
-        i++;
-        Delete(head, i);
-        Insert(head, size+1-i, temp->data);
-        temp = temp -> next;
+    Node* prev = NULL;
+    Node* current = *head;
+    Node* next = NULL;
+    while (current != NULL) {
+        next = current -> next;
+        current -> next = prev;
+        prev = current;
+        current = next;
     }
+    *head = prev;
 }
 
 void Print(Node* head) {
