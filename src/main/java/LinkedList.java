@@ -1,26 +1,23 @@
-import java.util.Scanner;
-
+class Node {
+    int data;
+    Node next;
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
 public class LinkedList {
 
-    Node head = new Node();
-    public static class Node
-    {
-        /* head */
-        int data;
-        Node next;
-    }
+    protected Node head = null;
 
     public void insert(int x) { // pass in the pointer of head, not actually the head node
-        Node temp = new Node();
-        temp.data = x;
+        Node temp = new Node(x);
         temp.next = head;
         head = temp;
     }
 
     public void insert(int pos, int x) { // pass in the pointer of head, not actually the head node
-        Node temp1 = new Node();
-        temp1.data = x;
-        temp1.next = null;
+        Node temp1 = new Node(x);
         if (pos == 1) {
             temp1.next = head;
             head = temp1;
@@ -60,6 +57,25 @@ public class LinkedList {
         head = prev; // Update head to the new first node
     }
 
+    public void reverseRecursion(Node p) {
+        if ( p == null || p.next == null ) {
+            head = p;
+            return;
+        }
+        reverseRecursion(p.next);
+        p.next.next = p;
+        p.next = null;
+    }
+
+    public void reversePrint(Node p) {
+        if (p == null) {
+            return;
+        }
+        reversePrint((p.next));
+        System.out.print(p.data + " ");
+    }
+
+
     @Override
     public String toString() {
         Node temp = head; // 临时节点遍历得到当前尾节点，不直接用head是不想失去头节点的引用
@@ -74,8 +90,6 @@ public class LinkedList {
     public static void main(String[] args)
     {
         LinkedList list = new LinkedList();
-        list.head = null; // 头节点
-
         list.insert(1,4);
         list.insert(2,5);
         list.insert(1,3);
@@ -89,6 +103,9 @@ public class LinkedList {
 
         list.reverse();
 
+        System.out.println(list);
+        list.reversePrint(list.head);
+        list.reverseRecursion(list.head);
         System.out.println(list);
 
 
