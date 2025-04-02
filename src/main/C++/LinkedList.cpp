@@ -47,38 +47,44 @@ void Delete(Node** head, int pos) {
     delete temp2; // 释放内存
 }
 
-int Size(Node** head) {
-    Node* temp = *head; // 临时节点遍历得到当前尾节点，不直接用head是不想失去头节点的引用
-    int length = 0;
-    while (temp -> next != NULL) {
-        length++;
-        temp = temp -> next;
-    }
-    return size;
-}
+
 
 
 void Reverse(Node** head) {
-    Node* temp = *head;
-    int i = 0;
-    int size = Size(head);
-    while (temp != NULL) {
-        i++;
-        Delete(head, i);
-        Insert(head, size+1-i, temp->data);
-        temp = temp -> next;
+    Node* prev = NULL;
+    Node* current = *head;
+    Node* next = NULL;
+    while (current != NULL) {
+        next = current->next;
+        current->next = prev;
+        prev=current;
+        current=next;
     }
+    *head = prev; 
 }
+
+// iteration迭代（循环）只需要一个临时变量，相对于recursion递归占用过多的stack空间，更推荐使用iteration迭代（循环）
 
 void Print(Node* head) {
     Node* temp = head; // 临时节点遍历得到当前尾节点，不直接用head是不想失去头节点的引用
     printf("List is:");
-    while (temp != NULL) {
+    while ( temp != NULL ) {
         printf(" %d", temp -> data);
         temp = temp -> next;
     }
     printf("\n");
 }
+
+// reverse print 本身需要额外空间来存储所有元素，所以用递归是可以的，其他情况下，因为递归会占用过多的stack空间，不推荐使用
+
+void ReversePrint(Node* p) {
+    if ( p == NULL ){
+        return;
+    }
+    ReversePrint(p -> next);
+    printf("%d ", p -> data);
+}
+
 
 
 int main()
@@ -111,6 +117,7 @@ int main()
     // Print(head);
     Reverse(&head);
     Print(head);
+    ReversePrint(head);
 
 
 }

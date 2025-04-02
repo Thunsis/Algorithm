@@ -1,26 +1,23 @@
-import java.util.Scanner;
-
+class Node {
+    int data;
+    Node next;
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
 public class LinkedList {
 
-    Node head = new Node();
-    public static class Node
-    {
-        /* head */
-        int data;
-        Node next;
-    }
+    private Node head;
 
     public void insert(int x) { // pass in the pointer of head, not actually the head node
-        Node temp = new Node();
-        temp.data = x;
+        Node temp = new Node(x);
         temp.next = head;
         head = temp;
     }
 
     public void insert(int pos, int x) { // pass in the pointer of head, not actually the head node
-        Node temp1 = new Node();
-        temp1.data = x;
-        temp1.next = null;
+        Node temp1 = new Node(x);
         if (pos == 1) {
             temp1.next = head;
             head = temp1;
@@ -60,6 +57,14 @@ public class LinkedList {
         head = prev; // Update head to the new first node
     }
 
+    public void reversePrint(Node head) {
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            reversePrint(temp.next);
+        }
+    }
+
+
     @Override
     public String toString() {
         Node temp = head; // 临时节点遍历得到当前尾节点，不直接用head是不想失去头节点的引用
@@ -90,6 +95,7 @@ public class LinkedList {
         list.reverse();
 
         System.out.println(list);
+//        list.reversePrint(list.head);
 
 
 
