@@ -1,12 +1,10 @@
 package LinkedListT;
 
-import java.util.Stack;
-
 /**
  * 链表抽象基类（支持泛型）
  * @param <E> 数据泛型类型
  * @param <T> 节点泛型类型，需继承自 Node<E, T>
- *
+ * <p>
  * 核心职责：
  * 1. 定义链表通用操作方法
  * 2. 通过泛型支持不同类型链表的实现

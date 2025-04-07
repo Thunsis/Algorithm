@@ -2,7 +2,7 @@ package LinkedListT;
 
 /**
  * 单链表实现（支持泛型）
- *
+ * <p>
  * 特性：
  * 1. 仅维护 next 指针
  * 2. 插入/删除操作无需处理 prev 指针
@@ -15,7 +15,7 @@ public class SinglyLinkedList<E> extends LinkedList<E, SinglyNode<E>> {
      */
     @Override
     public void insert(E data) {
-        SinglyNode<E> newNode = new SinglyNode<E>(data);
+        SinglyNode<E> newNode = new SinglyNode<>(data);
         newNode.next = head; // 新节点指向原头节点
         head = newNode;     // 更新头节点
     }
@@ -30,7 +30,7 @@ public class SinglyLinkedList<E> extends LinkedList<E, SinglyNode<E>> {
      */
     @Override
     public void insert(int pos, E data) {
-        SinglyNode<E> newNode = new SinglyNode<E>(data);
+        SinglyNode<E> newNode = new SinglyNode<>(data);
         if (pos == 1) {
             insert(data);
         } else {

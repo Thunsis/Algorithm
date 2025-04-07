@@ -1,10 +1,8 @@
 package LinkedListT;
 
-import java.util.Stack;
-
 /**
  * 双向链表实现类
- *
+ * <p>
  * 特性：
  * 1. 需要维护 prev 和 next 指针
  * 2. 所有修改操作必须同时维护双向指针，需要单独实现
@@ -19,7 +17,7 @@ public class DoublyLinkedList<E> extends LinkedList<E, DoublyNode<E>> {
      */
     @Override
     public void insert(E data) {
-        DoublyNode<E> newNode = new DoublyNode<E>(data);
+        DoublyNode<E> newNode = new DoublyNode<>(data);
         // 需要考虑next为null时next的prev没法赋值的问题
         if (head != null) {
             head.prev = newNode; // 原头节点前驱指向新节点
@@ -38,7 +36,7 @@ public class DoublyLinkedList<E> extends LinkedList<E, DoublyNode<E>> {
      */
     @Override
     public void insert(int pos, E data) {
-        DoublyNode<E> newNode = new DoublyNode<E>(data);
+        DoublyNode<E> newNode = new DoublyNode<>(data);
         if (pos == 1) {
             insert(data);
         } else {
@@ -67,7 +65,7 @@ public class DoublyLinkedList<E> extends LinkedList<E, DoublyNode<E>> {
      * 空间复杂度：O(1) —— 仅创建新节点
      */
     public void insertAtTail(E data) {
-        DoublyNode<E> newNode = new DoublyNode<E>(data);
+        DoublyNode<E> newNode = new DoublyNode<>(data);
         if (head == null) {
             head = newNode;
         } else {
