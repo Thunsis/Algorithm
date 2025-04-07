@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/Zhuanz/Documents/2025/github/Algorithm/src/main/C++/output/ReverseString'
+relocations:     []
+...
