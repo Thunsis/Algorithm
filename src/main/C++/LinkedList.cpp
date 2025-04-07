@@ -1,4 +1,7 @@
-#include<stdio.h>
+#include<iostream>
+#include<stack>
+using namespace std;
+
 struct Node
 {
     /* head */
@@ -151,6 +154,28 @@ void ReversePrint(Node* p) {
     printf("%d ", p->data);
 }
 
+void ReverseByStack(Node** head) {
+    if (*head == NULL) {
+        return;
+    }
+    stack<Node*> S;
+    Node* temp = *head;
+    while (temp != NULL) {
+        S.push(temp);
+        temp = temp->next;
+    }
+    temp = S.top();
+    *head = temp;
+    S.pop();
+    while (!S.empty()) {
+        temp->next = S.top();
+        S.pop();
+        temp = temp->next;
+    }
+    temp->next = NULL;
+
+}
+
 
 
 int main()
@@ -187,6 +212,7 @@ int main()
     ReverseRecursion(&head);
     Print(head);
 
-
+    ReverseByStack(&head);
+    Print(head);
 
 }

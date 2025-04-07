@@ -1,5 +1,7 @@
 package LinkedListT;
 
+import java.util.Stack;
+
 /**
  * 链表抽象基类（支持泛型）
  * @param <E> 数据泛型类型
@@ -122,5 +124,37 @@ public abstract class LinkedList<E, T extends Node<E, T>> {
         reverseRecursionHelper(current.next);
         current.next.next = current; // 反转指针
         current.next = null; // 断开原指针
+    }
+
+    /** 利用栈反转
+     * 时间复杂度：O(n) —— 遍历所有节点
+     * 空间复杂度：O(n) —— 递归调用栈深度为n
+     * */
+    public void reverseByStack() {
+        if (head == null) {
+            return;
+        }
+
+        java.util.Stack<T> stack = new java.util.Stack<>();
+        T current = head;
+
+        // 将所有节点压入栈
+        while (current != null) {
+            stack.push(current);
+            current = current.next;
+        }
+
+        // 设置新头节点并初始化指针
+        head = stack.peek();
+        current = head;
+
+        // 重新链接节点
+        stack.pop(); // 弹出已处理的头节点
+        while (!stack.isEmpty()) {
+            current.next = stack.pop();
+            current = current.next;
+        }
+
+        current.next = null; // 尾节点的 next 置空
     }
 }

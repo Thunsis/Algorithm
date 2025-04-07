@@ -1,5 +1,7 @@
 package LinkedListT;
 
+import java.lang.reflect.Array;
+
 /**
  * 栈实现（基于单链表）
  * @param <E> 数据类型
@@ -21,6 +23,7 @@ public class Stack<E> extends SinglyLinkedList<E> {
         return head == null;
     }
 
+
     public static void main(String[] args) {
         Stack<Integer> myStack = new Stack<>();
         myStack.push(1);
@@ -34,6 +37,7 @@ public class Stack<E> extends SinglyLinkedList<E> {
         myStack.isEmpty();
         System.out.println(myStack.isEmpty());
         System.out.println(myStack.top());
+
 
 
 

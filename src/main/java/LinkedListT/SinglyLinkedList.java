@@ -57,4 +57,32 @@ public class SinglyLinkedList<E> extends LinkedList<E, SinglyNode<E>> {
             prevNode.next = prevNode.next.next; // 跳过被删除节点
         }
     }
+
+    public static void main(String[] args) {
+        SinglyLinkedList<Integer> myList = new SinglyLinkedList<>();
+        myList.insert(1);
+        myList.insert(2);
+        myList.insert(3);
+        myList.insert(4);
+        myList.insert(5);
+        System.out.println(myList);
+
+
+        myList.insert(3,3);
+        myList.insert(4,4);
+        System.out.println(myList);
+
+        myList.delete(5);
+
+        System.out.println(myList);
+
+        myList.reversePrint();
+        myList.reverse();
+        System.out.println(myList);
+        myList.reverseRecursion();
+        System.out.println(myList);
+        myList.reverseByStack();
+        System.out.println(myList);
+
+    }
 }

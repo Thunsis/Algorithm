@@ -1,5 +1,7 @@
 package LinkedListT;
 
+import java.util.Stack;
+
 /**
  * 双向链表实现类
  *
@@ -185,8 +187,39 @@ public class DoublyLinkedList<E> extends LinkedList<E, DoublyNode<E>> {
         reverseRecursionHelper(next, current); // 递归处理下一个节点
     }
 
+    @Override
+    public void reverseByStack() {
+        if (head == null) {
+            return;
+        }
+
+        java.util.Stack<DoublyNode<E>> stack = new java.util.Stack<>();
+        DoublyNode<E> current = head;
+
+        // 将所有节点压入栈
+        while (current != null) {
+            stack.push(current);
+            current = current.next;
+        }
+
+        // 设置新头节点并初始化指针
+        head = stack.peek();
+        head.prev = null; // 新头节点的 prev 必须置空
+        current = head;
+
+        // 重新链接节点
+        stack.pop(); // 弹出已处理的头节点
+        while (!stack.isEmpty()) {
+            current.next = stack.pop();
+            current.next.prev = current; // 关键：设置下一节点的 prev
+            current = current.next;
+        }
+
+        current.next = null; // 尾节点的 next 置空
+    }
+
     public static void main(String[] args) {
-        DoublyLinkedList myList = new DoublyLinkedList();
+        DoublyLinkedList<Integer> myList = new DoublyLinkedList();
         myList.insert(1);
         myList.insert(2);
         myList.insert(3);
@@ -209,6 +242,8 @@ public class DoublyLinkedList<E> extends LinkedList<E, DoublyNode<E>> {
         myList.reverse();
         System.out.println(myList);
         myList.reverseRecursion();
+        System.out.println(myList);
+        myList.reverseByStack();
         System.out.println(myList);
 
 
