@@ -1,15 +1,16 @@
 package LinkedListT;
 
 /**
- * 链表抽象基类（泛型类）
- * @param <T> 具体节点类型，需继承自 Node<T>
+ * 链表抽象基类（支持泛型）
+ * @param <E> 数据泛型类型
+ * @param <T> 节点泛型类型，需继承自 Node<E, T>
  *
  * 核心职责：
  * 1. 定义链表通用操作方法
  * 2. 通过泛型支持不同类型链表的实现
  * 3. 提供基础方法实现（如打印、节点查找等）
  */
-public abstract class LinkedList<T extends Node<T>> {
+public abstract class LinkedList<E, T extends Node<E, T>> {
     /** 链表头节点引用 */
     protected T head;
 
@@ -58,13 +59,13 @@ public abstract class LinkedList<T extends Node<T>> {
     // ----------------- 抽象方法（需子类实现） -----------------
 
     /** 在链表头部插入数据 */
-    public abstract void insert(int data);
+    public abstract void insert(E data);
 
     /**
      * 在指定位置插入数据
      * @param pos 插入位置（1 ≤ pos ≤ length+1）
      */
-    public abstract void insert(int pos, int data);
+    public abstract void insert(int pos, E data);
 
     /** 删除指定位置节点 */
     public abstract void delete(int pos);

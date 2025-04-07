@@ -7,7 +7,7 @@ package LinkedListT;
  * 1. 需要维护 prev 和 next 指针
  * 2. 所有修改操作必须同时维护双向指针，需要单独实现
  */
-public class DoublyLinkedList extends LinkedList<DoublyNode> {
+public class DoublyLinkedList<E> extends LinkedList<E, DoublyNode<E>> {
 
     // ----------------- 核心操作 -----------------
 
@@ -16,8 +16,8 @@ public class DoublyLinkedList extends LinkedList<DoublyNode> {
      * 空间复杂度：O(1) —— 仅创建新节点
      */
     @Override
-    public void insert(int data) {
-        DoublyNode newNode = new DoublyNode(data);
+    public void insert(E data) {
+        DoublyNode<E> newNode = new DoublyNode<E>(data);
         // 需要考虑next为null时next的prev没法赋值的问题
         if (head != null) {
             head.prev = newNode; // 原头节点前驱指向新节点
@@ -35,12 +35,12 @@ public class DoublyLinkedList extends LinkedList<DoublyNode> {
      * 空间复杂度：O(1) —— 仅创建新节点
      */
     @Override
-    public void insert(int pos, int data) {
-        DoublyNode newNode = new DoublyNode(data);
+    public void insert(int pos, E data) {
+        DoublyNode<E> newNode = new DoublyNode<E>(data);
         if (pos == 1) {
             insert(data);
         } else {
-            DoublyNode prevNode = getNode(pos - 1);
+            DoublyNode<E> prevNode = getNode(pos - 1);
             // 维护新节点指针
             newNode.prev = prevNode;
             newNode.next = prevNode.next;
@@ -64,12 +64,12 @@ public class DoublyLinkedList extends LinkedList<DoublyNode> {
      * 时间复杂度：O(n) —— 需遍历到链表末尾
      * 空间复杂度：O(1) —— 仅创建新节点
      */
-    public void insertAtTail(int data) {
-        DoublyNode newNode = new DoublyNode(data);
+    public void insertAtTail(E data) {
+        DoublyNode<E> newNode = new DoublyNode<E>(data);
         if (head == null) {
             head = newNode;
         } else {
-            DoublyNode current = head;
+            DoublyNode<E> current = head;
             while (current.next != null) {
                 current = current.next;
             }
@@ -94,7 +94,7 @@ public class DoublyLinkedList extends LinkedList<DoublyNode> {
             }
             head = head.next; // 更新头节点
         } else {
-            DoublyNode prevNode = getNode(pos - 1);
+            DoublyNode<E> prevNode = getNode(pos - 1);
             if (prevNode.next != null) {
                 // 维护后继节点的前驱指针
                 if (prevNode.next.next != null) {
@@ -117,7 +117,7 @@ public class DoublyLinkedList extends LinkedList<DoublyNode> {
         if (head == null) return;
 
         // 定位到尾节点
-        DoublyNode current = head;
+        DoublyNode<E> current = head;
         while (current.next != null) {
             current = current.next;
         }
@@ -140,8 +140,8 @@ public class DoublyLinkedList extends LinkedList<DoublyNode> {
      */
     @Override
     public void reverse() {
-        DoublyNode current = head;
-        DoublyNode temp = null;
+        DoublyNode<E> current = head;
+        DoublyNode<E> temp = null;
 
         while (current != null) {
             // 交换前后指针
@@ -174,12 +174,12 @@ public class DoublyLinkedList extends LinkedList<DoublyNode> {
      * 时间复杂度：O(n) —— 递归遍历所有节点
      * 空间复杂度：O(n) —— 递归调用栈深度为n
      */
-    private void reverseRecursionHelper(DoublyNode current, DoublyNode prev) {
+    private void reverseRecursionHelper(DoublyNode<E> current, DoublyNode<E> prev) {
         if (current == null) {
             head = prev; // 终止条件：到达末尾，更新头节点
             return;
         }
-        DoublyNode next = current.next;
+        DoublyNode<E> next = current.next;
         current.next = prev; // 反转后继指针
         current.prev = next; // 反转前驱指针（指向原下一个节点）
         reverseRecursionHelper(next, current); // 递归处理下一个节点
